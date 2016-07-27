@@ -1,24 +1,27 @@
 function B = backward_solve(initial)
 	col = columns(initial);
-	col1 = col*col;
+	row = rows(initial);
+	col1 = col*row;
 	A = zeros(col1,col1);
-	for a = 1:col1
-		A(a,a) = 1;
-		if(a+col<=col1)
-			A(a,a+col) = 1;
-		endif
-		if(a-col>=1)
-			A(a,a-col) = 1;
-		endif
-		if(a+1<=col1)
-			A(a,a+1) = 1;
-		endif
-		if(a-1>=1)
-			A(a,a-1) = 1;
-		endif
+	for a = 1:row
+		for aa = 1:col
+			A((a-1)*col+aa,(a-1)*col+aa) = 1;
+			if(a>1)
+				A((a-1)*col+aa,(a-1)*col+aa-col) = 1;
+			endif
+			if(a<row)
+				A((a-1)*col+aa,(a-1)*col+aa+col) = 1;
+			endif
+			if(aa>1)
+				A(((a-1)*col+aa),((a-1)*col+aa-1)) = 1;
+			endif
+			if(aa<col)
+				A((a-1)*col+aa,(a-1)*col+aa+1) = 1;
+			endif
+		endfor
 	endfor
 	b=zeros(col1,1);
-	for a = 1:col
+	for a = 1:row
 		for aa = 1:col
 			b((a-1)*col+aa,1) = initial(a,aa);
 		endfor
@@ -44,8 +47,8 @@ function B = backward_solve(initial)
 		endwhile
 		m=m+1;
 	endwhile
-	B=zeros(col,col);
-	for a = 1:col
+	B=zeros(row,col);
+	for a = 1:row
 		for aa = 1:col
 			B(a,aa) = b((a-1)*col+aa,1);
 		endfor

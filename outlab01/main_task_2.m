@@ -32,6 +32,13 @@ function retval = main_task_2(a)
 endfunction
 
 [x, fval, info] = fsolve(@main_task_2, 0.8);
+tanb = tan(asin(sin(x)/n));
+t = (xw - w*tanb)/(vl*sin(x)) + (n*n*w*tanb)/(vl*sin(x));
 x = x*180/pi;
+
+xf = xw;
+yf = yw + v2*(t1+t);
+
 fid = fopen("output_outlab_task_A2.txt","w");
-fdisp(fid,x);
+
+fdisp(fid,sprintf('%.1f %.1f %.1f', x, xf, yf));

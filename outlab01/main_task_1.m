@@ -20,4 +20,4 @@ endfunction
 [x,fval,info] = fsolve(@main_task_1,0.8);
 x = x * 180/pi;
 fid = fopen("output_outlab_task_A1.txt","w");
-fdisp(fid,x);
+fdisp(fid,sprintf('%.1f', x));

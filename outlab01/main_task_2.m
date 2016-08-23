@@ -23,22 +23,21 @@ function retval = main_task_2(a)
 	global t1;
 
 	tanb = tan(asin(sin(a)/n));
-	t = (xw - w*tanb)/(vl*sin(a)) + (n*n*w*tanb)/(vl*sin(a));
+	retval(1,2) = t - (xw - w*tanb)/(vl*sin(a)) + (n*n*w*tanb)/(vl*sin(a));
 	vlcosa = vl*cos(a);
 	vlcosb = vl*cos(asin(sin(a)/n));
 
-    retval = w*n/(vlcosb) + (yw-d-w)/(vlcosa) + (d+v2*(t+t1))/(vlcosa) - t;
+    retval(1,1) = w*n/(vlcosb) + (yw-d-w)/(vlcosa) + (d+v2*(t+t1))/(vlcosa) - t;
 
 endfunction
 
-[x, fval, info] = fsolve(@main_task_2, 0.8);
+[x, fval, info] = fsolve(@main_task_2, [0.8 2000]);
 tanb = tan(asin(sin(x)/n));
-t = (xw - w*tanb)/(vl*sin(x)) + (n*n*w*tanb)/(vl*sin(x));
-x = x*180/pi;
+x(1,1) = x(1,1)*180/pi;
 
 xf = xw;
-yf = yw + v2*(t1+t);
+yf = yw + v2*(t1+x(1,2));
 
 fid = fopen("output_outlab_task_A2.txt","w");
 
-fdisp(fid,sprintf('%.1f %.1f %.1f', x, xf, yf));
+fdisp(fid,sprintf('%.1f %.1f %.1f', x(1,1), xf, yf));

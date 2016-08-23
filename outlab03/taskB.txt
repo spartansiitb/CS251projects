@@ -1,0 +1,3 @@
+GRASS Sceptile
+~/Earth/Asia/China
+grep -i -E "^grass|^water" Shanghai | sed 's/.* //' | grep -i -v "[bmBM]" | grep -x '.\{6,10\}'

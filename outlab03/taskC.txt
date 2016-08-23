@@ -1,0 +1,6 @@
+Magikarp
+find . -type d -exec rm -rf dir -v {} \;
+find . -type f -name 'A*' -exec rm -v {} \;
+find . -type f -regextype posix-extended  -regex './[0-9]|./[1][0-9]|./[2][0]' -exec rm -v {} \;
+find . -type f -name '*.jpg' |xargs rm -f
+cat * > ultraball.html

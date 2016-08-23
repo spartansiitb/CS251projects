@@ -1,0 +1,3 @@
+Tokyo
+~/Earth/Asia/Japan
+subl "$(find . -type f -size +50k -size -100k -iname 't*' ! -executable ! -writable -perm u=r ! -perm g=r ! -perm o=r)"
